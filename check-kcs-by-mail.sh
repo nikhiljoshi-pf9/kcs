@@ -4,7 +4,9 @@ echo  "Listing unpublished KCS articles by $1 exluding [Internal Only]"
 
 echo "-----------------------------"
 
-curl -s --header "X-Api-Key: $TOKEN" https://api.developerhub.io/api/v1/version/6167/report| jq -r ".[] | select(.createdBy.email == \"$1\" and .hasDraft == true) | .title" | grep -iv internal
+curl -s --header "X-Api-Key: $TOKEN" https://api.developerhub.io/api/v1/version/6167/report| jq -r ".[] | select(.sourceCreatedBy.email == \"$1\" and .hasDraft == true) | .title" | grep -iv internal
+
+curl -s --header "X-Api-Key: $TOKEN2" https://api.developerhub.io/api/v1/version/12760/report| jq -r ".[] | select(.sourceCreatedBy.email == \"$1\" and .hasDraft == true) | .title" | grep -iv internal
 
 echo "\n--------LIST ENDS------------\n"
 
